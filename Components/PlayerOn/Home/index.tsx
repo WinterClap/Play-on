@@ -1,12 +1,13 @@
 import React from "react";
 import { Background } from "../common";
+import { TrackShowCaseSlider } from "../TracksComponents/Slider";
 
 interface Props {}
 
 export const HomePage = (props: Props) => {
   return (
     <Background>
-      <h1>Home Content right here</h1>
+      <TrackShowCaseSlider></TrackShowCaseSlider>
     </Background>
   );
 };

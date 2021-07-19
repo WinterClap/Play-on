@@ -39,6 +39,16 @@ const SideBarContainer = styled(motion.aside)`
   color: #fff;
   border-radius: 0 20px 20px 0;
   border-right: 1px solid #828b9a;
+
+  &:before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: ${(props) => props.theme.colors.backgroundDark};
+  }
 `;
 
 const SideBarSection = styled(motion.section)`
@@ -56,13 +66,22 @@ const SideBarSectionTitle = styled.h1`
   padding-left: 20px;
   font-weight: 600;
 `;
-const SideBarSectionSubtitle = styled.h2`
+interface SideBarSectionSubtitle {
+  isActive?: boolean;
+}
+const SideBarSectionSubtitle = styled.h2<SideBarSectionSubtitle>`
   font-size: 1rem;
   width: 100%;
   font-weight: 600;
   padding-left: 20px;
   margin-bottom: 0;
-  color: #828b9a;
+  color: ${(props) => (props.isActive ? "#4ef0e0" : "#828b9a")};
+  cursor: pointer;
+  transition: all 320ms ease-in-out;
+  &:hover {
+    color: #7df0e4;
+  }
+  text-shadow: ${(props) => (props.isActive ? "0px 0px 10px #2bebd7;" : "")};
 `;
 const BrandContainer = styled(motion.div)`
   width: 90%;
@@ -77,17 +96,23 @@ interface SectionComponentProps {
   isActive?: boolean;
 }
 const SectionComponent = ({ icons, texts }: SectionComponentProps) => {
+  const router = useRouter();
+  const path = router.pathname;
+  let lastPart = path.split("/").pop();
+  console.log(lastPart);
   return (
     <>
       {texts.map((text, index) => (
-        <SideBarSectionSubtitle>
-          <Row width="100%" justifyContent="flex-start">
-            <IconContainer margin="0 0 0 0" flexBasis="20%">
-              <FontAwesomeIcon icon={icons[index]} size="1x" />
-            </IconContainer>
-            <span>{text}</span>
-          </Row>
-        </SideBarSectionSubtitle>
+        <Link key={text} href={`/playeron/${text.toLowerCase().replace(/\s+/g, "")}`}>
+          <SideBarSectionSubtitle isActive={lastPart === text.toLowerCase() ? true : false}>
+            <Row width="100%" justifyContent="flex-start">
+              <IconContainer margin="0 0 0 0" flexBasis="20%">
+                <FontAwesomeIcon icon={icons[index]} size="1x" />
+              </IconContainer>
+              <span>{text}</span>
+            </Row>
+          </SideBarSectionSubtitle>
+        </Link>
       ))}
     </>
   );
@@ -111,7 +136,6 @@ export const SideBar = (props: Props) => {
 
   return (
     <SideBarContainer>
-      <SideBarContainerBackground />
       <BrandContainer>
         <Image src={PlayerOnIcon} width="50px" height="50px" />
       </BrandContainer>

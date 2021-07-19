@@ -1,10 +1,12 @@
 import { SideBar } from "./SideBar";
 import styled from "styled-components";
+import { Background } from "./common";
 
 const ContentContainer = styled.div`
-  width: 100%;
-  display: flex;
   font-family: "Montserrat";
+  display: flex;
+  width: 100%;
+  position: relative;
 `;
 
 interface Props {
