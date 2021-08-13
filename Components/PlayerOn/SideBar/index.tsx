@@ -19,16 +19,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faCompass, faChartBar, faHeart, faFolder } from "@fortawesome/free-regular-svg-icons";
 import { Row } from "../common";
-const SideBarContainerBackground = styled.div`
-  position: absolute;
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-  border: none;
-  background-color: ${(props) => props.theme.colors.backgroundDark};
-`;
+
 const SideBarContainer = styled(motion.aside)`
   display: flex;
+  position: fixed;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -39,7 +33,6 @@ const SideBarContainer = styled(motion.aside)`
   color: #fff;
   border-radius: 0 20px 20px 0;
   border-right: 1px solid #828b9a;
-
   &:before {
     content: "";
     z-index: -1;
@@ -103,7 +96,7 @@ const SectionComponent = ({ icons, texts }: SectionComponentProps) => {
   return (
     <>
       {texts.map((text, index) => (
-        <Link key={text} href={`/playeron/${text.toLowerCase().replace(/\s+/g, "")}`}>
+        <Link passHref key={text} href={`/playeron/${text.toLowerCase().replace(/\s+/g, "")}`}>
           <SideBarSectionSubtitle isActive={lastPart === text.toLowerCase() ? true : false}>
             <Row width="100%" justifyContent="flex-start">
               <IconContainer margin="0 0 0 0" flexBasis="20%">
@@ -137,7 +130,7 @@ export const SideBar = (props: Props) => {
   return (
     <SideBarContainer>
       <BrandContainer>
-        <Image src={PlayerOnIcon} width="50px" height="50px" />
+        <Image src={PlayerOnIcon} width="50px" height="50px" alt="PlayerOn Logo" />
       </BrandContainer>
 
       {sectionsInfor.map((section) => (

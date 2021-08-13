@@ -111,13 +111,13 @@ export const SignIn: React.FC = () => {
   return (
     <BlackBackground>
       <Container initial="initialPage" animate="showPage" variants={containerVariants} exit="exitPage">
-        <Image src={Cover} layout="fill" objectFit="cover" quality="100" />
+        <Image src={Cover} layout="fill" objectFit="cover" quality="100" alt="cover image" />
         <SignBox variants={signInBoxVariants} initial="hidden" animate="show" style={{ transformOrigin: "-50% -50%" }}>
           <Backdrop>
             <IconContainer cursor="pointer" position="absolute" inset="auto auto 90px 20px">
-              <Link href="/">
+              <Link passHref href="/">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <FontAwesomeIcon icon={faArrowLeft} size="3x" color="#272f32" />
+                  <FontAwesomeIcon icon={faArrowLeft} size="2x" color="#272f32" />
                 </motion.div>
               </Link>
             </IconContainer>

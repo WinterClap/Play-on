@@ -36,8 +36,7 @@ const Article = styled.article`
   * > * {
     color: #fff;
   }
-  background: rgb(14, 25, 41);
-  background: linear-gradient(135deg, rgba(14, 25, 41, 1) 0%, rgba(0, 79, 89, 1) 90%);
+  background-color: ${(props) => props.theme.colors.black};
 `;
 
 const Container = styled(motion.section)`
@@ -222,18 +221,18 @@ export const ExtravagantButton = React.forwardRef(
   }
 );
 
-export const Landing: React.FC = () => {
+export const Landing = () => {
   return (
     <Article>
       <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
         <Column flexBasis="50%">
           <Column alignItems="flex-start">
-            <Title>Playing </Title>
+            <Title>Playing</Title>
             <Title>The</Title>
             <Title>Mood</Title>
           </Column>
           <Subtitle>Enjoy music even more!</Subtitle>
-          <Link href="/signin" passHref>
+          <Link passHref href="/signin">
             <div>
               <ExtravagantButton text="Get Started" margin="40px 0 0 0" hover hoverWidth="320px">
                 <div>

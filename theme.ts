@@ -7,9 +7,11 @@ const theme:DefaultTheme = {
         terciary: "#c86c87",
         alternative: "#2f2db4",
         backgroundDark: "#0e1929",
-        text: "#fff",
+        text: "#fff", 
         dimmedText: "#c3c3c3",
+        dimmedTextDark: "#7a848e",
         black: "#121212",
+        blackDark: "#000",
         dimmedLight: "#dfdbd8",
         spotifyGreen: "#1db954",
         spotifyGreenOnHover: "#1ed760"

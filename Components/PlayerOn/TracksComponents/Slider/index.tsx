@@ -6,35 +6,30 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { useWindowSize } from "../../common";
-
+import { motion } from "framer-motion";
 interface Props {}
 const Container = styled.div`
-  border: 1px solid white;
-  width: calc(100%);
   padding: 50px;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 1px solid white;
   align-items: center;
 `;
 const Title = styled.h1`
-  border: 1px solid white;
   font-size: 2rem;
 `;
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid white;
   width: 100px;
 `;
 interface ButtonProps {
   backgroundColor?: string;
 }
-const ButtonObject = styled.button<ButtonProps>`
+const ButtonObject = styled(motion.button)<ButtonProps>`
   border: 1px solid white;
   display: flex;
   align-items: center;
@@ -42,22 +37,24 @@ const ButtonObject = styled.button<ButtonProps>`
   border: none;
   color: #fff;
   border-radius: 50%;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
   height: 40px;
   width: 40px;
   outline: none;
-  border: 1px solid white;
   cursor: pointer;
   background-color: ${(props) => (props.backgroundColor === "secondary" ? props.theme.colors.secondary : "#162131")};
 `;
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-const Button = ({ icon, backgroundColor }: any) => {
+const Button = ({ icon, backgroundColor, ...rest }: any) => {
   return (
-    <ButtonObject backgroundColor={backgroundColor}>
-      <IconContainer>
-        <FontAwesomeIcon icon={icon} size="2x" />
-      </IconContainer>
-    </ButtonObject>
+    <div {...rest}>
+      <ButtonObject backgroundColor={backgroundColor} whileTap={{ scale: 0.95 }} whileHover={{ scale: 1.05 }}>
+        <IconContainer>
+          <FontAwesomeIcon icon={icon} size="2x" />
+        </IconContainer>
+      </ButtonObject>
+    </div>
   );
 };
 const TrackShowCaseContainer = styled.div`
@@ -90,11 +87,9 @@ const TrackArtist = styled.h2`
 
 const TrackSlide = styled.div`
   width: 100%;
-  border: 1px solid yellow;
-  height: 320px;
 `;
 const StyledSwiper = styled(Swiper)`
-  height: 325px;
+  height: 320px;
 `;
 export const TrackShowCaseSlider = (props: Props) => {
   const size = useWindowSize();
@@ -104,12 +99,13 @@ export const TrackShowCaseSlider = (props: Props) => {
       <Header>
         <Title>Weekly Top Track</Title>
         <ButtonContainer>
-          <Button icon={faAngleLeft} />
-          <Button icon={faAngleRight} backgroundColor="secondary" />
+          <Button className="prev" icon={faAngleLeft} />
+          <Button className="next" icon={faAngleRight} backgroundColor="secondary" />
         </ButtonContainer>
       </Header>
       <TrackSlide>
         <StyledSwiper
+          navigation={{ nextEl: ".next", prevEl: ".prev" }}
           centerInsufficientSlides
           spaceBetween={20}
           slidesPerView={
@@ -123,7 +119,6 @@ export const TrackShowCaseSlider = (props: Props) => {
               ? 2
               : 1
           }
-          pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("change!")}

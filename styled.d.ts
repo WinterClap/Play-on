@@ -10,7 +10,9 @@ declare module "styled-components" {
             backgroundDark: string
             text: string
             dimmedText: string
+            dimmedTextDark: string
             black: string
+            blackDark: string
             dimmedLight: string
             spotifyGreen: string
             spotifyGreenOnHover: string

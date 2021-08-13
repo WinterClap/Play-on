@@ -16,10 +16,9 @@ const Container = styled(motion.div)<ContainerProps>`
   z-index: 2;
   width: 100%;
   color: #fff;
-  background-color: #0e1929;
+  background-color: ${(props) => props.theme.colors.blackDark};
 `;
 const Nav = styled.nav`
-  margin: 20px 0 20px 0;
   color: #fff;
   display: flex;
   flex-wrap: nowrap;
@@ -41,6 +40,9 @@ const Nav = styled.nav`
     @media screen and (max-width: 600px) {
       display: none;
     }
+  }
+  @media screen and (max-width: 600px) {
+    margin: 20px 0 20px 0;
   }
 `;
 const SignContainer = styled.div`
@@ -106,7 +108,7 @@ export const NavBar = ({ toggleMenu, setToggleMenu, links, toggleMenuLinks }: Na
         show={state.show}
       >
         <Nav>
-          <Image src={PlayerOnIcon} width="50px" height="50px" />
+          <Image src={PlayerOnIcon} width="50px" height="50px" alt="playeron-Icon" />
           <ul>
             {links.map((link) => {
               return (

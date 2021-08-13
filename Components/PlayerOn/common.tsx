@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 export const Background = styled.div`
   background-color: ${(props) => props.theme.colors.backgroundDark};
-  width: calc(100% - 250px);
   min-height: 100vh;
+  width: 100%;
   color: #fff;
   font-family: "Montserrat";
 `;
@@ -14,14 +14,39 @@ interface FlexProps {
   justifyContent?: string;
   alignItems?: string;
   width?: string;
+  height?: string;
+  padding?: string;
 }
 export const Row = styled.div<FlexProps>`
   display: flex;
+  padding: ${(props) => props.padding || "0"};
   justify-content: ${(props) => props.justifyContent || "center"};
   align-items: ${(props) => props.alignItems || "center"};
   width: ${(props) => props.width || "auto"};
   margin: ${(props) => props.margin || "0"};
 `;
+export const Col = styled.div<FlexProps>`
+  display: flex;
+  padding: ${(props) => props.padding || "0"};
+  flex-direction: column;
+  justify-content: ${(props) => props.justifyContent || "center"};
+  align-items: ${(props) => props.alignItems || "center"};
+  width: ${(props) => props.width || "auto"};
+  margin: ${(props) => props.margin || "0"};
+  height: ${(props) => props.height};
+`;
+
+interface TextProps {
+  fontSize?: string;
+}
+export const SectionTitle = styled.h1<TextProps>`
+  font-size: ${(props) => props.fontSize || "3rem"};
+  color: ${(props) => props.theme.colors.text};
+  font-weight: 600;
+`;
+/* 
+USEFUL COMPONENTS
+*/
 
 export function useWindowSize() {
   // Initialize state with undefined width/height so server and client renders match

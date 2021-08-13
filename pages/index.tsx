@@ -16,7 +16,7 @@ const MenuContainer = styled(motion.div)`
   align-items: flex-start;
   position: absolute;
   color: #fff;
-  background-color: #0e1929;
+  background-color: ${(props) => props.theme.colors.black};
   top: 90px;
   width: 100%;
 
@@ -29,7 +29,7 @@ const MenuContainer = styled(motion.div)`
     padding: 20px 50px;
     cursor: pointer;
     &:hover {
-      background-color: #066aff;
+      background-color: ${(props) => props.theme.colors.terciary};
     }
   }
   @media screen and (max-width: 600px) {
@@ -54,7 +54,7 @@ const Index: React.FC = () => {
               <ul>
                 {toggleMenuLinks.map((link) => {
                   return (
-                    <Link key={link} href={`/${link.toLowerCase().replace(/\s+/g, "")}`}>
+                    <Link passHref key={link} href={`/${link.toLowerCase().replace(/\s+/g, "")}`}>
                       <li>{link}</li>
                     </Link>
                   );
